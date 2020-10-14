@@ -1,5 +1,4 @@
+# frozen_string_literal: true
+
 class CCBot
-    def initialize
-        
-    end
 end
