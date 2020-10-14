@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
-gem 'telegram-bot-ruby'
-gem 'open-uri'
 gem 'json'
+gem 'open-uri'
+gem 'telegram-bot-ruby'
