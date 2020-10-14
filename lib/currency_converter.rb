@@ -1,26 +1,29 @@
-# ruby service wrap for FreeCurrencyConverterApi
-require 'open-uri'
-require 'json'
+require_relative 'service_wrap.rb'
 
 class CurrencyConverter
-  API = '4577dd24ef319e6f3fc3'.freeze
-  SERVICE_URL = 'https://free.currconv.com'.freeze
-  @api_version = 'v7'
-  private_constant :API
+  include ServiceWrap
 
-  attr_reader :local_c, :forien_c
+  attr_reader :from, :to
+ 
 
-  def initialize; end
+  def initialize(from, to)
+    @from = from
+    @to = to
+  end
 
   def rate
-    #open("#{SERVICE_URL}/api/v7/convert?q=USD_EGP,EGP_USD&compact=ultra&apiKey=#{API}").read
-    URI.parse("#{SERVICE_URL}/api/v7/convert?q=USD_EGP,EGP_USD&compact=ultra&apiKey=#{API}").open
+    urll = url(@from, @to)
+    exchange_rate(urll)
   end
+
 end
 
-x = CurrencyConverter.new
-pp response = x.rate
-json = JSON.parse(response)
-pp json['USD_EGP']
+ x = CurrencyConverter.new('USD', 'EGP')
+    #pp x.rate
+    
+# pp response = x.rate
+# json = JSON.parse(response)
+# pp json['USD_EGP']
 # arry = json.hash.to_a
 # pp arry[0]
+#pp x.exchange_rate
