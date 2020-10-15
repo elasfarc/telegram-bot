@@ -70,7 +70,7 @@ class CurrencyConverter
     @pairs.each do |user_input|
       # search by code
       @currenices.each { |code| local_pairs << user_input.upcase if code[0] == user_input.upcase.to_sym }
-    
+
       # search by country or currency name
       @currenices.each do |code|
         if code[1][1].include?(user_input.capitalize) || code[1][0].include?(user_input.capitalize)
@@ -135,22 +135,30 @@ class CurrencyConverter
   end
 
   def converter
-    @pairs = mapping()
+    @pairs = mapping
     @pairs = ['USD'] if @pairs.empty?
+    exchange_rate(@pairs) 
+  end
 
-     exchange_rate(@pairs)
+  def converter_format
+    rate = converter()
+    i = 1
+    while (i < rate.length ) 
+       pp "#{amount} #{pairs[i]} = #{amount * rate[i]} "
+        i += 1
+    end
   end
 end
 
-#x = CurrencyConverter.new('         5.2        usd  egp  egypt cad lklk 5 5 665 euro france pound United States eur')
+# x = CurrencyConverter.new('         5.2        usd  egp  egypt cad lklk 5 5 665 euro france pound United States eur')
 x = CurrencyConverter.new('         5.2        usd  egp  egypt cad lklk 5 5 665 euro france  eur')
-#x = CurrencyConverter.new('         870')
+# x = CurrencyConverter.new('         870')
 
-#pp x.pairs
-pp x.amount
+# pp x.pairs
+#pp x.amount
 # pp x.converter
- pp x.converter()
-#pp x.mapping
+#pp x.converter
+# pp x.mapping
 
 # pp response = x.rate
 # json = JSON.parse(response)
@@ -158,3 +166,7 @@ pp x.amount
 # arry = json.hash.to_a
 # pp arry[0]
 # pp x.exchange_rate
+
+
+
+puts x.converter_display
