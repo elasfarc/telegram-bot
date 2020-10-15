@@ -11,6 +11,6 @@ module ServiceWrap2
   private_constant :API
 
   def exchange_rate(base)
-    HTTParty.get(SERVICE_URL + base).parsed_response['conversion_rates']['EGP']
+    HTTParty.get(SERVICE_URL + base).parsed_response
   end
 end
