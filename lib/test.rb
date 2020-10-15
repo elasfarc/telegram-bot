@@ -187,7 +187,7 @@ currenices = {
   ZAR: ['South African Rand', 'South Africa']
 }
 
-curriences2 = {
+currenices2 = {
   AED: ['UAE Dirham', 'United Arab Emirates'],
   ARS: ['Argentine Peso', 'Argentina'],
   AUD: ['Australian Dollar', 'Australia'],
@@ -196,9 +196,18 @@ curriences2 = {
 }
 # pp curriences[:USD].class
 
-currenices.each do |a|
+currenices2.each do |a|
   #pp a
   # puts a[0] if a[1][1] == "Egypt " || a[1][0] == "Egyptian Pound"
   # a.select {|s| s[1].include? 'Egypt'}
-   puts a[0] if a[1][1].include?'Egypt' || a[1][0] == "Egyptian Pound  "
+   ##puts a[0] if a[1][1].include?'Egypt' || a[1][0] == "Egyptian Pound  "
 end
+
+x = currenices2.map do |code| 
+  code[0] == :EGP
+end
+pp x
+#currenices.select {a[1][1].include?'Egypt' || a[1][0] == "Egyptian Pound"}
+
+
+
