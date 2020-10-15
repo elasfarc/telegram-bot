@@ -7,12 +7,22 @@ module ServiceWrap
   VERSION = 'v7'.freeze
   private_constant :API
 
-  def url(from, to)
-    "#{SERVICE_URL}/api/#{VERSION}/convert?q=#{from}_#{to}&compact=ultra&apiKey=#{API}"
+  def url(indicator)
+    # "#{SERVICE_URL}/api/#{VERSION}/convert?q=#{from}_#{to}&compact=ultra&apiKey=#{API}"
+    # "#{SERVICE_URL}/api/#{VERSION}/convert?q=#{from}_#{to}&compact=ultra&apiKey=#{API}"
+    # "#{SERVICE_URL}/api/#{VERSION}/countries?apiKey=#{API}"
+    # s = indicator == "convert" ? "convert?q=#{from}_#{to}&compact=ultra&" : "countries?"
+    "#{SERVICE_URL}/api/#{VERSION}/#{indicator}/apiKey=#{API}"
+  end
+
+  def countries_list
+    indicator = 'countries?'
+    country = HTTParty.get(url(indicator)).parsed_response
   end
 
   def exchange_rate(from, to)
-    response = HTTParty.get(url(from, to))
+    indicator = "convert?q=#{from}_#{to}&compact=ultra&"
+    response = HTTParty.get(url(indicator))
     response.parsed_response["#{from}_#{to}"]
   end
 end

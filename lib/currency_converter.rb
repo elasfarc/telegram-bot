@@ -11,10 +11,13 @@ class CurrencyConverter
     @amount = amount
   end
 
+  def input_interpret(input); end
+
   def converter
     # url = url(@from, @to)
     # exchange_rate(url)["#{@from}_#{@to}"]
-    exchange_rate(@from, @to) * @amount
+    ex = exchange_rate(@from, @to)
+    ex.nil? ? 'service down' : ex * @amount
   end
 end
 
