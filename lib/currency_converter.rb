@@ -8,88 +8,78 @@ class CurrencyConverter
 
   def initialize(input)
     @currenices = {
-        AED: ['UAE Dirham', 'United Arab Emirates'],
-        ARS: ['Argentine Peso', 'Argentina'],
-        AUD: ['Australian Dollar', 'Australia'],
-        BGN: ['Bulgarian Lev', 'Bulgaria'],
-        BRL: ['Brazilian Real', 'Brazil'],
-        BSD: ['Bahamian Dollar', 'Bahamas'],
-        CAD: ['Canadian Dollar', 'Canada'],
-        CHF: ['Swiss Franc', 'Switzerland'],
-        CLP: ['Chilean Peso', 'Chile'],
-        CNY: ['Chinese Renminbi', 'China'],
-        COP: ['Colombian Peso', 'Colombia'],
-        CZK: ['Czech Koruna', 'Czech Republic'],
-        DKK: ['Danish Krone', 'Denmark'],
-        DOP: ['Dominican Peso', 'Dominican Republic'],
-        EGP: ['Egyptian Pound', 'Egypt'],
-        EUR: ['Euro', %w[Germany Austria Belgium Cyprus Estonia Finland France Greece Ireland Italy Latvia Lithuania Malta Netherlands Portugal Slovakia Slovenia Spain]],
-        FJD: ['Fiji Dollar', 'Fiji'],
-        GBP: ['Pound Sterling', 'United Kingdom'],
-        GTQ: ['Guatemalan Quetzal', 'Guatemala'],
-        HKD: ['Hong Kong Dollar', 'Hong Kong'],
-        HRK: ['Croatian Kuna', 'Croatia'],
-        HUF: ['Hungarian Forint', 'Hungary'],
-        IDR: ['Indonesian Rupiah', 'Indonesia'],
-        ILS: ['Israeli New Shekel', 'Israel'],
-        INR: ['Indian Rupee', 'India'],
-        ISK: ['Icelandic Krona', 'Iceland'],
-        JPY: ['Japanese Yen', 'Japan'],
-        KRW: ['South Korean Won', 'South Korea'],
-        KZT: ['Kazakhstani Tenge', 'Kazakhstan'],
-        MVR: ['Maldivian Rufiyaa', 'Maldives'],
-        MXN: ['Mexican Peso', 'Mexico'],
-        MYR: ['Malaysian Ringgit', 'Malaysia'],
-        NOK: ['Norwegian Krone', 'Norway'],
-        NZD: ['New Zealand Dollar', 'New Zealand'],
-        PAB: ['Panamanian Balboa', 'Panama'],
-        PEN: ['Peruvian Sol', 'Peru'],
-        PHP: ['Philippine Peso', 'Philippines'],
-        PKR: ['Pakistani Rupee', 'Pakistan'],
-        PLN: ['Polish Zloty', 'Poland'],
-        PYG: ['Paraguayan Guarani', 'Paraguay'],
-        RON: ['Romanian Leu', 'Romania'],
-        RUB: ['Russian Ruble', 'Russia'],
-        SAR: ['Saudi Riyal', 'Saudi Arabia'],
-        SEK: ['Swedish Krona', 'Sweden'],
-        SGD: ['Singapore Dollar', 'Singapore'],
-        THB: ['Thai Baht', 'Thailand'],
-        TRY: ['Turkish Lira', 'Turkey'],
-        TWD: ['New Taiwan Dollar', 'Taiwan'],
-        UAH: ['Ukrainian Hryvnia', 'Ukraine'],
-        USD: ['United States Dollar', 'United States'],
-        UYU: ['Uruguayan Peso', 'Uruguay'],
-        ZAR: ['South African Rand', 'South Africa']
-      }
+      AED: ['UAE Dirham', 'United Arab Emirates'],
+      ARS: ['Argentine Peso', 'Argentina'],
+      AUD: ['Australian Dollar', 'Australia'],
+      BGN: ['Bulgarian Lev', 'Bulgaria'],
+      BRL: ['Brazilian Real', 'Brazil'],
+      BSD: ['Bahamian Dollar', 'Bahamas'],
+      CAD: ['Canadian Dollar', 'Canada'],
+      CHF: ['Swiss Franc', 'Switzerland'],
+      CLP: ['Chilean Peso', 'Chile'],
+      CNY: ['Chinese Renminbi', 'China'],
+      COP: ['Colombian Peso', 'Colombia'],
+      CZK: ['Czech Koruna', 'Czech Republic'],
+      DKK: ['Danish Krone', 'Denmark'],
+      DOP: ['Dominican Peso', 'Dominican Republic'],
+      EGP: ['Egyptian Pound', 'Egypt'],
+      EUR: ['Euro', %w[Germany Austria Belgium Cyprus Estonia Finland France Greece Ireland Italy Latvia Lithuania Malta Netherlands Portugal Slovakia Slovenia Spain]],
+      FJD: ['Fiji Dollar', 'Fiji'],
+      GBP: ['Pound Sterling', 'United Kingdom'],
+      GTQ: ['Guatemalan Quetzal', 'Guatemala'],
+      HKD: ['Hong Kong Dollar', 'Hong Kong'],
+      HRK: ['Croatian Kuna', 'Croatia'],
+      HUF: ['Hungarian Forint', 'Hungary'],
+      IDR: ['Indonesian Rupiah', 'Indonesia'],
+      ILS: ['Israeli New Shekel', 'Israel'],
+      INR: ['Indian Rupee', 'India'],
+      ISK: ['Icelandic Krona', 'Iceland'],
+      JPY: ['Japanese Yen', 'Japan'],
+      KRW: ['South Korean Won', 'South Korea'],
+      KZT: ['Kazakhstani Tenge', 'Kazakhstan'],
+      MVR: ['Maldivian Rufiyaa', 'Maldives'],
+      MXN: ['Mexican Peso', 'Mexico'],
+      MYR: ['Malaysian Ringgit', 'Malaysia'],
+      NOK: ['Norwegian Krone', 'Norway'],
+      NZD: ['New Zealand Dollar', 'New Zealand'],
+      PAB: ['Panamanian Balboa', 'Panama'],
+      PEN: ['Peruvian Sol', 'Peru'],
+      PHP: ['Philippine Peso', 'Philippines'],
+      PKR: ['Pakistani Rupee', 'Pakistan'],
+      PLN: ['Polish Zloty', 'Poland'],
+      PYG: ['Paraguayan Guarani', 'Paraguay'],
+      RON: ['Romanian Leu', 'Romania'],
+      RUB: ['Russian Ruble', 'Russia'],
+      SAR: ['Saudi Riyal', 'Saudi Arabia'],
+      SEK: ['Swedish Krona', 'Sweden'],
+      SGD: ['Singapore Dollar', 'Singapore'],
+      THB: ['Thai Baht', 'Thailand'],
+      TRY: ['Turkish Lira', 'Turkey'],
+      TWD: ['New Taiwan Dollar', 'Taiwan'],
+      UAH: ['Ukrainian Hryvnia', 'Ukraine'],
+      USD: ['United States Dollar', 'United States'],
+      UYU: ['Uruguayan Peso', 'Uruguay'],
+      ZAR: ['South African Rand', 'South Africa']
+    }
     @pairs = []
     input_interpret(input)
-    
   end
 
-#   def mapping
-#     local_pairs = []
-#     #search by code
-#     code_array = @pairs.map(&:upcase).map(&:to_sym)
+  def mapping
+    local_pairs = []
+    @pairs.each do |user_input|
+      # search by code
+      @currenices.each { |code| local_pairs << user_input.upcase if code[0] == user_input.upcase.to_sym }
     
-#     code_array.each do|ele| 
-#          @currenices.select {|code| pp "true" if code[0] == ele}
-#     end
-
-    def mapping
-        local_pairs = []
-        @pairs.each do |user_input| 
-            n =local_pairs.length
-            #search by code
-             @currenices.each{ |code| local_pairs << user_input.upcase if code[0] == user_input.upcase.to_sym}
-            next if local_pairs.length > n
-            #search by country or currency name
-            @currenices.each{ |code| local_pairs << code[0].to_s if code[1][1].include?(user_input.capitalize) || code[1][0].include?(user_input.capitalize) }
+      # search by country or currency name
+      @currenices.each do |code|
+        if code[1][1].include?(user_input.capitalize) || code[1][0].include?(user_input.capitalize)
+          local_pairs << code[0].to_s
         end
-        local_pairs
+      end
     end
-    
-    
-  
+    local_pairs.uniq!
+  end
 
   def input_interpret(input)
     input = delete_first_spaces(input)
@@ -145,15 +135,18 @@ class CurrencyConverter
   end
 
   def converter(base)
+    @pairs = mapping
+
     # exchange_rate(base)
   end
 end
 
-x = CurrencyConverter.new('         5.2        usd  egp  egypt cad lklk 5 5 665 euro france pound United States eur')
+#x = CurrencyConverter.new('         5.2        usd  egp  egypt cad lklk 5 5 665 euro france pound United States eur')
+x = CurrencyConverter.new('         5.2        usd  egp  egypt cad lklk 5 5 665 euro france  eur')
 pp x.pairs
 pp x.amount
 # pp x.converter
-#pp x.converter('USDf')
+# pp x.converter('USDf')
 pp x.mapping
 
 # pp response = x.rate
