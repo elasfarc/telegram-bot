@@ -78,7 +78,7 @@ class CurrencyConverter
         end
       end
     end
-    local_pairs.uniq!
+    local_pairs.uniq
   end
 
   def input_interpret(input)
@@ -134,20 +134,23 @@ class CurrencyConverter
     [currency, input[currency.length..-1]]
   end
 
-  def converter(base)
-    @pairs = mapping
+  def converter
+    @pairs = mapping()
+    @pairs = ['USD'] if @pairs.empty?
 
-    # exchange_rate(base)
+     exchange_rate(@pairs)
   end
 end
 
 #x = CurrencyConverter.new('         5.2        usd  egp  egypt cad lklk 5 5 665 euro france pound United States eur')
 x = CurrencyConverter.new('         5.2        usd  egp  egypt cad lklk 5 5 665 euro france  eur')
-pp x.pairs
+#x = CurrencyConverter.new('         870')
+
+#pp x.pairs
 pp x.amount
 # pp x.converter
-# pp x.converter('USDf')
-pp x.mapping
+ pp x.converter()
+#pp x.mapping
 
 # pp response = x.rate
 # json = JSON.parse(response)

@@ -10,7 +10,10 @@ module ServiceWrap2
   SERVICE_URL = "https://#{VERSION}.exchangerate-api.com/#{VERSION}/#{API}/latest/".freeze
   private_constant :API
 
-  def exchange_rate(base)
-    HTTParty.get(SERVICE_URL + base).parsed_response
+  def exchange_rate(pairs)
+    ex_rate = []
+    response = HTTParty.get(SERVICE_URL + pairs[0]).parsed_response
+    pairs.each { |code| ex_rate << response['conversion_rates'][code]}
+     ex_rate
   end
 end
