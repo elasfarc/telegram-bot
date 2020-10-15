@@ -12,31 +12,38 @@ class CurrencyConverter
   end
 
   def input_interpret(input)
+    input = delete_first_spaces(input)
+    # extract amount and update input
+    input = extract_amount(input)
+    
+
+  end
+
+  def delete_first_spaces(input)
     # delete first space if there was any
     while input.index(' ').zero?
       input = input[1..-1]
       break if input.index(' ').nil?
     end
-    # extract amount and update input
+    input
+  end
+
+  def extract_amount(input)
     if input.to_f.zero?
       @amount = 1
     else
       @amount = input.to_f
       # no fraction provided
       slice = if input.to_f == input.to_i
-                input.to_i.to_s.length + 1
+                input.to_i.to_s.length
               else
-                input.to_f.to_s.length + 1
+                input.to_f.to_s.length
               end
+      #return 'check your input' unless input.to_f.zero?
+
       input = input[slice..-1]
-      return "check your input" unless input.to_f.zero?
     end
-
-    
-
-
-
-    # input.to_f.zero? ? (@amount = 1) : (@amount = input.to_f)
+    input
   end
 
   def converter_2(base)
