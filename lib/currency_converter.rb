@@ -145,11 +145,11 @@ class CurrencyConverter
     rate = converter
     if pairs.length == 1
         rate = rate.drop(1)
-       rate.map { |el| result << "#{amount} #{el[0]} = #{amount * el[1]} #{pairs[0]} " }
+       rate.map { |el| result << "#{amount} #{pairs[0]} = #{amount * el[1]} #{el[0]} " }
     else
         i = 1
       while i < rate.length
-        result << "#{amount} #{pairs[i]} = #{amount * rate[i]} #{pairs[0]} "
+        result << "#{amount} #{pairs[0]} = #{amount * rate[i]} #{pairs[i]} "
         i += 1
       end
     end
