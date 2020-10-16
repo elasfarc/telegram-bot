@@ -61,14 +61,13 @@ class CurrencyConverter
       UYU: %w[URUGUAYAN-PESO URUGUAY],
       ZAR: %w[SOUTH-AFRICAN-RAND SOUTH-AFRICA]
     }
-    @interpreted_input = []
+
     @pairs = []
-    
+    @interpreted_input = input_interpret(input)
   end
 
   def mapping
     local_pairs = []
-    @interpreted_input = input_interpret(input)
     @interpreted_input.each do |user_input|
       # search by code
       @currenices.each { |code| local_pairs << user_input.upcase if code[0] == user_input.upcase.to_sym }
@@ -102,7 +101,7 @@ class CurrencyConverter
       interpreted_input << input_arry[0] unless input_arry[0].empty? || !input_arry[0].to_i.zero?
       input = input_arry[1]
     end
-    
+    interpreted_input
   end
 
   def delete_first_spaces(input)

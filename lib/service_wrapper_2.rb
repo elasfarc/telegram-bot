@@ -14,8 +14,3 @@ module ServiceWrap2
     ex_rate
   end
 end
-
-
-
-
-
