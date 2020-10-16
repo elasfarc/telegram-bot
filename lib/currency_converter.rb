@@ -137,27 +137,35 @@ class CurrencyConverter
   def converter
     @pairs = mapping
     @pairs = ['USD'] if @pairs.empty?
-    exchange_rate(@pairs) 
+    exchange_rate(@pairs)
   end
 
   def converter_format
-    rate = converter()
-    i = 1
-    while (i < rate.length ) 
-       pp "#{amount} #{pairs[i]} = #{amount * rate[i]} "
+    result = []
+    rate = converter
+    if pairs.length == 1
+        rate = rate.drop(1)
+       rate.map { |el| result << "#{amount} #{el[0]} = #{amount * el[1]} #{pairs[0]} " }
+    else
+        i = 1
+      while i < rate.length
+        result << "#{amount} #{pairs[i]} = #{amount * rate[i]} #{pairs[0]} "
         i += 1
+      end
     end
+    result
   end
+  
 end
 
 # x = CurrencyConverter.new('         5.2        usd  egp  egypt cad lklk 5 5 665 euro france pound United States eur')
-x = CurrencyConverter.new('         5.2        usd  egp  egypt cad lklk 5 5 665 euro france  eur')
-# x = CurrencyConverter.new('         870')
+#x = CurrencyConverter.new('         5.2        usd  egp  egypt cad lklk 5 5 665 euro france  eur')
+ #x = CurrencyConverter.new('         870')
 
 # pp x.pairs
-#pp x.amount
+ #pp x.amount
 # pp x.converter
-#pp x.converter
+# pp x.converter
 # pp x.mapping
 
 # pp response = x.rate
@@ -167,6 +175,4 @@ x = CurrencyConverter.new('         5.2        usd  egp  egypt cad lklk 5 5 665 
 # pp arry[0]
 # pp x.exchange_rate
 
-
-
-puts x.converter_display
+#puts x.converter_format
