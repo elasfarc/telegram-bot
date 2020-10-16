@@ -75,6 +75,10 @@ class CurrencyConverter
       # search by country or currency name
       @currenices.each do |code|
         local_pairs << code[0].to_s if code[1][1] == user_input.upcase || code[1][0] == user_input.upcase
+        # EU countries case
+        if code[1][1].is_a?(Array)
+          code[1][1].each { |europe_country| local_pairs << code[0].to_s if europe_country == user_input.upcase }
+        end
       end
     end
     local_pairs
@@ -120,7 +124,6 @@ class CurrencyConverter
               else
                 input.to_f.to_s.length
               end
-      
 
       input = input[slice..-1]
     end
@@ -160,4 +163,3 @@ class CurrencyConverter
     pairs.uniq
   end
 end
-
