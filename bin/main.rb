@@ -12,14 +12,19 @@ Telegram::Bot::Client.run(token) do |bot|
       bot.api.send_message(chat_id: message.chat.id, text: "welcome, #{message.from.first_name}\n")
       bot.api.send_message(chat_id: message.chat.id, text: " Provide your pair in the form of the following:\n amount from to\n from to \n amount")
     else
-        input = message.text
-        pp input
+      input = message.text
+      pp input
+      begin
         converter = CurrencyConverter.new(input)
+      rescue StandardError
+        invalid_input = true
+      end
+      if invalid_input
+        bot.api.send_message(chat_id: message.chat.id, text: 'check your input')
+      else
         text = converter.converter_format
-        #text = text.map(&:inspect).join(', ')
-        #bot.api.send_message(chat_id: message.chat.id, text: text)
         text.each { |txt| bot.api.send_message(chat_id: message.chat.id, text: txt) }
-        #bot.api.send_message(chat_id: message.chat.id, text: text)
+    end
 
     end
   end

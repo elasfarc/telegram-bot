@@ -85,7 +85,10 @@ class CurrencyConverter
     input = delete_first_spaces(input)
     # extract amount and update input
     input = extract_amount(input)
-    return 'check input' unless input.to_f.zero?
+    # wrong input in the form '100 12 USD'
+    # check if it's now '12 USD' after running extract_amount()
+    raise 'check input' unless input.to_f.zero?
+
     return if input.nil?
 
     until input.length.zero?
@@ -136,31 +139,32 @@ class CurrencyConverter
 
   def converter
     @pairs = mapping
-    @pairs = ['USD', 'EGP', 'EUR', 'CAD'] if @pairs.empty?
+    @pairs = %w[USD EUR GBP AUD JPY CAD EGP] if @pairs.empty?
+    @pairs += %w[USD EUR GBP AUD JPY CAD] if @pairs.length == 1
+    
     exchange_rate(@pairs)
   end
 
   def converter_format
     result = []
     rate = converter
-    
-     i = 1
+
+    i = 1
     while i < rate.length
-      result << "#{amount} #{pairs[0]} = #{amount * rate[i]} #{pairs[i]} "
+      result << "#{amount} #{pairs[0]}  =  #{amount * rate[i]} #{pairs[i]} "
       i += 1
     end
-    
+
     result
   end
-  
 end
 
 # x = CurrencyConverter.new('         5.2        usd  egp  egypt cad lklk 5 5 665 euro france pound United States eur')
-#x = CurrencyConverter.new('         5.2        usd  egp  egypt cad lklk 5 5 665 euro france  eur')
- #x = CurrencyConverter.new('         870')
+# x = CurrencyConverter.new('         5.2        usd  egp  egypt cad lklk 5 5 665 euro france  eur')
+# x = CurrencyConverter.new('         870')
 
 # pp x.pairs
- #pp x.amount
+# pp x.amount
 # pp x.converter
 # pp x.converter
 # pp x.mapping
@@ -172,10 +176,12 @@ end
 # pp arry[0]
 # pp x.exchange_rate
 
-#puts x.converter_format
+# puts x.converter_format
 
 
-x = CurrencyConverter.new("5")
+
+x = CurrencyConverter.new('1000   usd')
+#pp x.input_interpret('5 5.5' )
 pp x.amount
 pp x.pairs
 pp x.converter
