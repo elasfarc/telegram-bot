@@ -8,59 +8,60 @@ class CurrencyConverter
 
   def initialize(input)
     @currenices = {
-      AED: ['UAE Dirham', 'United Arab Emirates'],
-      ARS: ['Argentine Peso', 'Argentina'],
-      AUD: ['Australian Dollar', 'Australia'],
-      BGN: ['Bulgarian Lev', 'Bulgaria'],
-      BRL: ['Brazilian Real', 'Brazil'],
-      BSD: ['Bahamian Dollar', 'Bahamas'],
-      CAD: ['Canadian Dollar', 'Canada'],
-      CHF: ['Swiss Franc', 'Switzerland'],
-      CLP: ['Chilean Peso', 'Chile'],
-      CNY: ['Chinese Renminbi', 'China'],
-      COP: ['Colombian Peso', 'Colombia'],
-      CZK: ['Czech Koruna', 'Czech Republic'],
-      DKK: ['Danish Krone', 'Denmark'],
-      DOP: ['Dominican Peso', 'Dominican Republic'],
-      EGP: ['Egyptian Pound', 'Egypt'],
-      EUR: ['Euro', %w[Germany Austria Belgium Cyprus Estonia Finland France Greece Ireland Italy Latvia Lithuania Malta Netherlands Portugal Slovakia Slovenia Spain]],
-      FJD: ['Fiji Dollar', 'Fiji'],
-      GBP: ['Pound Sterling', 'United Kingdom'],
-      GTQ: ['Guatemalan Quetzal', 'Guatemala'],
-      HKD: ['Hong Kong Dollar', 'Hong Kong'],
-      HRK: ['Croatian Kuna', 'Croatia'],
-      HUF: ['Hungarian Forint', 'Hungary'],
-      IDR: ['Indonesian Rupiah', 'Indonesia'],
-      ILS: ['Israeli New Shekel', 'Israel'],
-      INR: ['Indian Rupee', 'India'],
-      ISK: ['Icelandic Krona', 'Iceland'],
-      JPY: ['Japanese Yen', 'Japan'],
-      KRW: ['South Korean Won', 'South Korea'],
-      KZT: ['Kazakhstani Tenge', 'Kazakhstan'],
-      MVR: ['Maldivian Rufiyaa', 'Maldives'],
-      MXN: ['Mexican Peso', 'Mexico'],
-      MYR: ['Malaysian Ringgit', 'Malaysia'],
-      NOK: ['Norwegian Krone', 'Norway'],
-      NZD: ['New Zealand Dollar', 'New Zealand'],
-      PAB: ['Panamanian Balboa', 'Panama'],
-      PEN: ['Peruvian Sol', 'Peru'],
-      PHP: ['Philippine Peso', 'Philippines'],
-      PKR: ['Pakistani Rupee', 'Pakistan'],
-      PLN: ['Polish Zloty', 'Poland'],
-      PYG: ['Paraguayan Guarani', 'Paraguay'],
-      RON: ['Romanian Leu', 'Romania'],
-      RUB: ['Russian Ruble', 'Russia'],
-      SAR: ['Saudi Riyal', 'Saudi Arabia'],
-      SEK: ['Swedish Krona', 'Sweden'],
-      SGD: ['Singapore Dollar', 'Singapore'],
-      THB: ['Thai Baht', 'Thailand'],
-      TRY: ['Turkish Lira', 'Turkey'],
-      TWD: ['New Taiwan Dollar', 'Taiwan'],
-      UAH: ['Ukrainian Hryvnia', 'Ukraine'],
-      USD: ['United States Dollar', 'United States'],
-      UYU: ['Uruguayan Peso', 'Uruguay'],
-      ZAR: ['South African Rand', 'South Africa']
+      AED: ['UAE-DIRHAM', 'UNITED-ARAB EMIRATES'],
+      ARS: %w[ARGENTINE-PESO ARGENTINA],
+      AUD: %w[AUSTRALIAN-DOLLAR AUSTRALIA],
+      BGN: %w[BULGARIAN-LEV BULGARIA],
+      BRL: %w[BRAZILIAN-REAL BRAZIL],
+      BSD: %w[BAHAMIAN-DOLLAR BAHAMAS],
+      CAD: %w[CANADIAN-DOLLAR CANADA],
+      CHF: %w[SWISS-FRANC SWITZERLAND],
+      CLP: %w[CHILEAN-PESO CHILE],
+      CNY: %w[CHINESE-RENMINBI CHINA],
+      COP: %w[COLOMBIAN-PESO COLOMBIA],
+      CZK: %w[CZECH-KORUNA CZECH-REPUBLIC],
+      DKK: %w[DANISH-KRONE DENMARK],
+      DOP: %w[DOMINICAN-PESO DOMINICAN-REPUBLIC],
+      EGP: %w[EGYPTIAN-POUND EGYPT],
+      EUR: ['EURO', %w[GERMANY AUSTRIA BELGIUM CYPRUS ESTONIA FINLAND FRANCE GREECE IRELAND ITALY LATVIA LITHUANIA MALTA NETHERLANDS PORTUGAL SLOVAKIA SLOVENIA SPAIN]],
+      FJD: %w[FIJI-DOLLAR FIJI],
+      GBP: %w[POUND-STERLING UNITED-KINGDOM],
+      GTQ: %w[GUATEMALAN-QUETZAL GUATEMALA],
+      HKD: %w[HONG-KONG-DOLLAR HONG-KONG],
+      HRK: %w[CROATIAN-KUNA CROATIA],
+      HUF: %w[HUNGARIAN-FORINT HUNGARY],
+      IDR: %w[INDONESIAN-RUPIAH INDONESIA],
+      ILS: %w[ISRAELI-NEW-SHEKEL ISRAEL],
+      INR: %w[INDIAN-RUPEE INDIA],
+      ISK: %w[ICELANDIC-KRONA ICELAND],
+      JPY: %w[JAPANESE-YEN JAPAN],
+      KRW: %w[SOUTH-KOREAN-WON SOUTH-KOREA],
+      KZT: %w[KAZAKHSTANI-TENGE KAZAKHSTAN],
+      MVR: %w[MALDIVIAN-RUFIYAA MALDIVES],
+      MXN: %w[MEXICAN-PESO MEXICO],
+      MYR: %w[MALAYSIAN-RINGGIT MALAYSIA],
+      NOK: %w[NORWEGIAN-KRONE NORWAY],
+      NZD: %w[NEW-ZEALAND-DOLLAR NEW-ZEALAND],
+      PAB: %w[PANAMANIAN-BALBOA PANAMA],
+      PEN: %w[PERUVIAN-SOL PERU],
+      PHP: %w[PHILIPPINE-PESO PHILIPPINES],
+      PKR: %w[PAKISTANI-RUPEE PAKISTAN],
+      PLN: %w[POLISH-ZLOTY POLAND],
+      PYG: %w[PARAGUAYAN-GUARANI PARAGUAY],
+      RON: %w[ROMANIAN-LEU ROMANIA],
+      RUB: %w[RUSSIAN-RUBLE RUSSIA],
+      SAR: %w[SAUDI-RIYAL SAUDI-ARABIA],
+      SEK: %w[SWEDISH-KRONA SWEDEN],
+      SGD: %w[SINGAPORE-DOLLAR SINGAPORE],
+      THB: %w[THAI-BAHT THAILAND],
+      TRY: %w[TURKISH-LIRA TURKEY],
+      TWD: %w[NEW-TAIWAN-DOLLAR TAIWAN],
+      UAH: %w[UKRAINIAN-HRYVNIA UKRAINE],
+      USD: %w[UNITED-STATES-DOLLAR UNITED-STATES],
+      UYU: %w[URUGUAYAN-PESO URUGUAY],
+      ZAR: %w[SOUTH-AFRICAN-RAND SOUTH-AFRICA]
     }
+
     @pairs = []
     input_interpret(input)
   end
@@ -73,9 +74,7 @@ class CurrencyConverter
 
       # search by country or currency name
       @currenices.each do |code|
-        if code[1][1].include?(user_input.capitalize) || code[1][0].include?(user_input.capitalize)
-          local_pairs << code[0].to_s
-        end
+        local_pairs << code[0].to_s if code[1][1].include?(user_input.upcase) || code[1][0].include?(user_input.upcase)
       end
     end
     local_pairs
@@ -182,10 +181,8 @@ end
 
 # puts x.converter_format
 
-
-
 x = CurrencyConverter.new('1000   usd')
-#pp x.input_interpret('5 5.5' )
+# pp x.input_interpret('5 5.5' )
 pp x.amount
 pp x.pairs
 pp x.converter

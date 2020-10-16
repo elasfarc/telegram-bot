@@ -22,7 +22,9 @@ Telegram::Bot::Client.run(token) do |bot|
       if invalid_input
         bot.api.send_message(chat_id: message.chat.id, text: 'check your input')
       else
+        pp converter.pairs
         text = converter.converter_format
+        pp converter.pairs
         text.each { |txt| bot.api.send_message(chat_id: message.chat.id, text: txt) }
     end
 
