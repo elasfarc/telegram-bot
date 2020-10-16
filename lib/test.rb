@@ -264,14 +264,18 @@ end
   ZAR: ['South African Rand', 'South Africa']
 }
 
-@arr = []
-@hh.each do |k, v|
-  v[0][v[0].index(' ')] = '-' until v[0].index(' ').nil? unless v[0].index(' ').nil?
-  v[1][v[1].index(' ')] = '-' unless v[1].index(' ').nil?
-  currn = v[0].upcase
-  country = v[1].upcase
-  arr1 = [currn, country]
-  @hh[k] = arr1
-end
+# @arr = []
+# @hh.each do |k, v|
+#   v[0][v[0].index(' ')] = '-' until v[0].index(' ').nil? unless v[0].index(' ').nil?
+#   v[1][v[1].index(' ')] = '-' unless v[1].index(' ').nil?
+#   currn = v[0].upcase
+#   country = v[1].upcase
+#   arr1 = [currn, country]
+#   @hh[k] = arr1
+# end
 
-pp @hh
+# pp @hh
+
+
+x = @hh.to_a
+pp x[0][1][0]

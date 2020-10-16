@@ -8,7 +8,7 @@ class CurrencyConverter
 
   def initialize(input)
     @currenices = {
-      AED: ['UAE-DIRHAM', 'UNITED-ARAB EMIRATES'],
+      AED: ['UAE-DIRHAM', 'UNITED-ARAB-EMIRATES'],
       ARS: %w[ARGENTINE-PESO ARGENTINA],
       AUD: %w[AUSTRALIAN-DOLLAR AUSTRALIA],
       BGN: %w[BULGARIAN-LEV BULGARIA],
@@ -74,7 +74,7 @@ class CurrencyConverter
 
       # search by country or currency name
       @currenices.each do |code|
-        local_pairs << code[0].to_s if code[1][1].include?(user_input.upcase) || code[1][0].include?(user_input.upcase)
+        local_pairs << code[0].to_s if code[1][1] == (user_input.upcase) || code[1][0] == (user_input.upcase)
       end
     end
     local_pairs
