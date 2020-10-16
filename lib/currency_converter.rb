@@ -142,6 +142,7 @@ class CurrencyConverter
 
   def converter
     @pairs = mapping
+
     @pairs = %w[USD EUR GBP AUD JPY CAD EGP] if @pairs.empty?
     @pairs += %w[USD EUR GBP AUD JPY CAD] if @pairs.length == 1
     @pairs = uniq_pairs(pairs)
