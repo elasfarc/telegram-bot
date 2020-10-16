@@ -1,10 +1,7 @@
 require_relative 'service_wrapper_2.rb'
 class CurrencyConverter
-  # include ServiceWrap
   include ServiceWrap2
-
-  attr_reader :pairs
-  attr_reader :amount, :currenices, :interpreted_input
+  attr_reader :pairs, :amount, :currenices, :interpreted_input
 
   def initialize(input)
     @currenices = {
@@ -61,28 +58,24 @@ class CurrencyConverter
       UYU: %w[URUGUAYAN-PESO URUGUAY],
       ZAR: %w[SOUTH-AFRICAN-RAND SOUTH-AFRICA]
     }
-
     @pairs = []
     @interpreted_input = input_interpret(input)
   end
 
-  def mapping
-    local_pairs = []
-    @interpreted_input.each do |user_input|
-      # search by code
-      @currenices.each { |code| local_pairs << user_input.upcase if code[0] == user_input.upcase.to_sym }
+  def converter_format
+    result = []
+    rate = converter
 
-      # search by country or currency name
-      @currenices.each do |code|
-        local_pairs << code[0].to_s if code[1][1] == user_input.upcase || code[1][0] == user_input.upcase
-        # EU countries case
-        if code[1][1].is_a?(Array)
-          code[1][1].each { |europe_country| local_pairs << code[0].to_s if europe_country == user_input.upcase }
-        end
-      end
+    i = 1
+    while i < rate.length
+      result << "#{amount} #{pairs[0]}  =  #{amount * rate[i]} #{pairs[i]} "
+      i += 1
     end
-    local_pairs
+
+    result
   end
+
+  private
 
   def input_interpret(input)
     interpreted_input = []
@@ -149,17 +142,21 @@ class CurrencyConverter
     exchange_rate(@pairs)
   end
 
-  def converter_format
-    result = []
-    rate = converter
-
-    i = 1
-    while i < rate.length
-      result << "#{amount} #{pairs[0]}  =  #{amount * rate[i]} #{pairs[i]} "
-      i += 1
+  def mapping
+    local_pairs = []
+    @interpreted_input.each do |user_input|
+      # search by code
+      @currenices.each { |code| local_pairs << user_input.upcase if code[0] == user_input.upcase.to_sym }
+      # search by country or currency name
+      @currenices.each do |code|
+        local_pairs << code[0].to_s if code[1][1] == user_input.upcase || code[1][0] == user_input.upcase
+        # EU countries case
+        if code[1][1].is_a?(Array)
+          code[1][1].each { |europe_country| local_pairs << code[0].to_s if europe_country == user_input.upcase }
+        end
+      end
     end
-
-    result
+    local_pairs
   end
 
   def uniq_pairs(pairs)

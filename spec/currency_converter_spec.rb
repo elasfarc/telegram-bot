@@ -1,7 +1,6 @@
 require_relative '../lib/currency_converter.rb'
 
 RSpec.describe CurrencyConverter do
-
   describe 'constant API' do
     it 'can not be accessed outside the class' do
       expect { CurrencyConverter::API }.to raise_error NameError
@@ -35,7 +34,8 @@ RSpec.describe CurrencyConverter do
           it 'should ignore the space/s' do
             input = '5 USD              EUR'
             converter = CurrencyConverter.new(input)
-            expect(converter.interpreted_input).to eq(%w[USD EUR])
+            converter.converter_format
+            expect(converter.pairs).to eq(%w[USD EUR])
           end
         end
         context 'no space between amount and v1 ∈ [currencies pairs] ' do
