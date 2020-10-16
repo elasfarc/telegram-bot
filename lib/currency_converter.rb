@@ -78,7 +78,7 @@ class CurrencyConverter
         end
       end
     end
-    local_pairs.uniq
+    local_pairs
   end
 
   def input_interpret(input)
@@ -141,7 +141,7 @@ class CurrencyConverter
     @pairs = mapping
     @pairs = %w[USD EUR GBP AUD JPY CAD EGP] if @pairs.empty?
     @pairs += %w[USD EUR GBP AUD JPY CAD] if @pairs.length == 1
-    
+    @pairs = uniq_pairs(pairs)
     exchange_rate(@pairs)
   end
 
@@ -156,6 +156,10 @@ class CurrencyConverter
     end
 
     result
+  end
+
+  def uniq_pairs(pairs)
+    pairs.uniq
   end
 end
 
