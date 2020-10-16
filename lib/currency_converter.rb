@@ -1,3 +1,5 @@
+# rubocop:disable Metrics/MethodLength
+# rubocop:disable Layout/LineLength
 require_relative 'service_wrapper_2.rb'
 class CurrencyConverter
   include ServiceWrap2
@@ -163,3 +165,5 @@ class CurrencyConverter
     pairs.uniq
   end
 end
+# rubocop:enable Metrics/MethodLength
+# rubocop:enable Layout/LineLength

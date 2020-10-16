@@ -1,3 +1,4 @@
+# rubocop:disable Metrics/BlockLength
 require_relative '../lib/currency_converter.rb'
 
 RSpec.describe CurrencyConverter do
@@ -111,3 +112,4 @@ RSpec.describe CurrencyConverter do
     end
   end
 end
+# rubocop:enable Metrics/BlockLength
