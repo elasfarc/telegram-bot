@@ -17,7 +17,7 @@ module ServiceWrap
 
   def countries_list
     indicator = 'countries?'
-    country = HTTParty.get(url(indicator)).parsed_response
+    HTTParty.get(url(indicator)).parsed_response
   end
 
   def exchange_rate(from, to)
@@ -26,7 +26,3 @@ module ServiceWrap
     response.parsed_response["#{from}_#{to}"]
   end
 end
-
-# pp ServiceWrap.exchange_rate('https://free.currconv.com/api/v7/convert?q=_&compact=ultra&apiKey=4577dd24ef319e6f3fc3')
-
-# pp ServiceWrap::API

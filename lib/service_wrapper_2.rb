@@ -1,7 +1,4 @@
-# ruby service wrap for
-# Getting a rate
-# rate = response_obj['conversion_rates']['EUR']
-
+# ruby service wrap for exchangerate-api.com
 module ServiceWrap2
   require 'httparty'
   require 'json'
@@ -11,16 +8,10 @@ module ServiceWrap2
   private_constant :API
 
   def exchange_rate(pairs)
-    # ex_rate = []
-    # response = HTTParty.get(SERVICE_URL + pairs[0]).parsed_response
-    # #return ex_rate << responseresponse['conversion_rates'][code] if pairs.length == 1
-    # pairs.each { |code| ex_rate << response['conversion_rates'][code] }
-    # ex_rate
     ex_rate = []
     pp SERVICE_URL + pairs[0]
     response = HTTParty.get(SERVICE_URL + pairs[0]).parsed_response
-    # pp response
     pairs.each { |code| ex_rate << response['conversion_rates'][code] }
     ex_rate
- end
+  end
 end

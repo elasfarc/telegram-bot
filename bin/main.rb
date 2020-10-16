@@ -3,9 +3,6 @@ require_relative '../lib/currency_converter.rb'
 token = '1015939462:AAH6wJmzjKT9z3AkP0g_3GlsOwVS0fGEEek'
 
 Telegram::Bot::Client.run(token) do |bot|
-  # bot.listen do |message|
-  # pp message.text
-  # end
   bot.listen do |message|
     case message.text
     when '/start'
@@ -26,7 +23,7 @@ Telegram::Bot::Client.run(token) do |bot|
         text = converter.converter_format
         pp converter.pairs
         text.each { |txt| bot.api.send_message(chat_id: message.chat.id, text: txt) }
-    end
+      end
 
     end
   end
