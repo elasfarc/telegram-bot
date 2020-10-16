@@ -9,7 +9,6 @@ module ServiceWrap2
 
   def exchange_rate(pairs)
     ex_rate = []
-    pp SERVICE_URL + pairs[0]
     response = HTTParty.get(SERVICE_URL + pairs[0]).parsed_response
     pairs.each { |code| ex_rate << response['conversion_rates'][code] }
     ex_rate

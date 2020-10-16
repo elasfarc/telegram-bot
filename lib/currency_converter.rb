@@ -92,7 +92,6 @@ class CurrencyConverter
 
     until input.length.zero?
       input = delete_first_spaces(input)
-      # pp input
       input_arry = extract_currency(input)
       @pairs << input_arry[0] unless input_arry[0].empty? || !input_arry[0].to_i.zero?
       input = input_arry[1]
@@ -121,7 +120,7 @@ class CurrencyConverter
               else
                 input.to_f.to_s.length
               end
-      # return 'check your input' unless input.to_f.zero?
+      
 
       input = input[slice..-1]
     end
@@ -162,27 +161,3 @@ class CurrencyConverter
   end
 end
 
-# x = CurrencyConverter.new('         5.2        usd  egp  egypt cad lklk 5 5 665 euro france pound United States eur')
-# x = CurrencyConverter.new('         5.2        usd  egp  egypt cad lklk 5 5 665 euro france  eur')
-# x = CurrencyConverter.new('         870')
-
-# pp x.pairs
-# pp x.amount
-# pp x.converter
-# pp x.converter
-# pp x.mapping
-
-# pp response = x.rate
-# json = JSON.parse(response)
-# pp json['USD_EGP']
-# arry = json.hash.to_a
-# pp arry[0]
-# pp x.exchange_rate
-
-# puts x.converter_format
-
-x = CurrencyConverter.new('1000   usd')
-# pp x.input_interpret('5 5.5' )
-pp x.amount
-pp x.pairs
-pp x.converter
