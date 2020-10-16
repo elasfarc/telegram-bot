@@ -4,7 +4,7 @@ class CurrencyConverter
   include ServiceWrap2
 
   attr_reader :pairs
-  attr_reader :amount, :currenices
+  attr_reader :amount, :currenices, :interpreted_input
 
   def initialize(input)
     @currenices = {
@@ -63,12 +63,12 @@ class CurrencyConverter
     }
 
     @pairs = []
-    input_interpret(input)
+    @interpreted_input = input_interpret(input)
   end
 
   def mapping
     local_pairs = []
-    @pairs.each do |user_input|
+    @interpreted_input.each do |user_input|
       # search by code
       @currenices.each { |code| local_pairs << user_input.upcase if code[0] == user_input.upcase.to_sym }
 
@@ -85,6 +85,7 @@ class CurrencyConverter
   end
 
   def input_interpret(input)
+    interpreted_input = []
     input = delete_first_spaces(input)
     # extract amount and update input
     input = extract_amount(input)
@@ -97,9 +98,10 @@ class CurrencyConverter
     until input.length.zero?
       input = delete_first_spaces(input)
       input_arry = extract_currency(input)
-      @pairs << input_arry[0] unless input_arry[0].empty? || !input_arry[0].to_i.zero?
+      interpreted_input << input_arry[0] unless input_arry[0].empty? || !input_arry[0].to_i.zero?
       input = input_arry[1]
     end
+    interpreted_input
   end
 
   def delete_first_spaces(input)
