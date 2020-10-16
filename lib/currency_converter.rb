@@ -136,23 +136,20 @@ class CurrencyConverter
 
   def converter
     @pairs = mapping
-    @pairs = ['USD'] if @pairs.empty?
+    @pairs = ['USD', 'EGP', 'EUR', 'CAD'] if @pairs.empty?
     exchange_rate(@pairs)
   end
 
   def converter_format
     result = []
     rate = converter
-    if pairs.length == 1
-        rate = rate.drop(1)
-       rate.map { |el| result << "#{amount} #{pairs[0]} = #{amount * el[1]} #{el[0]} " }
-    else
-        i = 1
-      while i < rate.length
-        result << "#{amount} #{pairs[0]} = #{amount * rate[i]} #{pairs[i]} "
-        i += 1
-      end
+    
+     i = 1
+    while i < rate.length
+      result << "#{amount} #{pairs[0]} = #{amount * rate[i]} #{pairs[i]} "
+      i += 1
     end
+    
     result
   end
   
@@ -176,3 +173,9 @@ end
 # pp x.exchange_rate
 
 #puts x.converter_format
+
+
+x = CurrencyConverter.new("5")
+pp x.amount
+pp x.pairs
+pp x.converter

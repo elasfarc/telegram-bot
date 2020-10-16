@@ -18,12 +18,7 @@ module ServiceWrap2
     # ex_rate
     ex_rate = []
     response = HTTParty.get(SERVICE_URL + pairs[0]).parsed_response
-    if pairs.length == 1
-      response['conversion_rates'].to_a
-
-    else
-      pairs.each { |code| ex_rate << response['conversion_rates'][code] }
-      ex_rate
-    end
+    pairs.each { |code| ex_rate << response['conversion_rates'][code] }
+    ex_rate
  end
 end

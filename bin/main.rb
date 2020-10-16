@@ -16,9 +16,9 @@ Telegram::Bot::Client.run(token) do |bot|
         pp input
         converter = CurrencyConverter.new(input)
         text = converter.converter_format
-        text = text.map(&:inspect).join(', ')
-        bot.api.send_message(chat_id: message.chat.id, text: text)
-        #text.each { |txt| bot.api.send_message(chat_id: message.chat.id, text: txt) }
+        #text = text.map(&:inspect).join(', ')
+        #bot.api.send_message(chat_id: message.chat.id, text: text)
+        text.each { |txt| bot.api.send_message(chat_id: message.chat.id, text: txt) }
         #bot.api.send_message(chat_id: message.chat.id, text: text)
 
     end
