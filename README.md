@@ -1,5 +1,9 @@
-# telegram-bot
 
+# Currency Converter telegram-bot
+
+
+## screenshoot
+![screenshot](Scr.png)
 
 
 ## Built With
@@ -8,29 +12,24 @@
 - exchangerate-api
 - Telegram Bot API
 
-## Repl
 
-[live view]()
+## prerequisites requirements:
+ 
+ - ruby 
+ - Telegram Bot API 
 
-## screenshoot
-![screenshot](Scr.png)
+## setup:
 
-## Getting Started
- From local machine:
-
-You should have Ruby installed to run this.
-to run the bot Open your terminal and type ruby bin/main.rb in the root file of the project.
-
-From Live Demo:
-
-Click on the Live Demo link below, once there click on 'Run' and the game will start to run.
-
+ - clone https://github.com/elasfarc/telegram-bot.git cd telegram-bot
+ - gem install telegram-bot-ruby (Telegram Bot API ) 
+ - ruby bin/main.rb.   (in the root file of the project)
+ - after running go to telegram channel (@currency_converterr_bot)
 
 ## Bot Input-Interpret
 
- -Provide your pair in the form of the following:
+	 -Provide your pair in the form of the following:
   	 		[Amount] [currencies pairs] 
-  	 				    [currencies pairs] = (base currency) (one or more quote currencies)
+  	 			[currencies pairs] = (base currency) (one or more quote currencies)
 
   	  -all arguments are optional
   	   		if no [amount] is  provided default amount is 1.0 
@@ -95,4 +94,4 @@ Give a ⭐️ if you like this project!
 
 ## 📝 License
 
-This project is [MIT](lic.url) licensed.
+This project is [MIT](https://mit-license.org/) licensed.
