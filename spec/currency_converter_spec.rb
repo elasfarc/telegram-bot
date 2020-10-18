@@ -8,6 +8,16 @@ RSpec.describe CurrencyConverter do
     end
   end
 
+  describe '#exchange_rate(pairs)' do
+    it 'returns a rates array for corresponding [pairs] against pairs[0]' do
+      input = '1000 USD EGP EUR'
+      converter = CurrencyConverter.new(input)
+
+      pairs = %w[USD USD USD]
+      expect(converter.exchange_rate(pairs)).to match_array [1, 1, 1]
+    end
+  end
+
   describe '#converter_format' do
     describe '#input_interpret' do
       context 'invalid user input' do
