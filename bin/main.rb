@@ -23,9 +23,11 @@ Telegram::Bot::Client.run(token) do |bot|
       if invalid_input
         bot.api.send_message(chat_id: message.chat.id, text: 'check the amount again!')
       else
-        pp converter.interpreted_input
+
         text = converter.converter_format
+        puts 'pairs are'
         pp converter.pairs
+        puts "exchange rate: #{text}"
         text.each { |txt| bot.api.send_message(chat_id: message.chat.id, text: txt) }
       end
 
