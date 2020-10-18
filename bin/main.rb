@@ -2,6 +2,9 @@ require 'telegram/bot'
 require_relative '../lib/currency_converter.rb'
 token = '1015939462:AAH6wJmzjKT9z3AkP0g_3GlsOwVS0fGEEek'
 
+puts 'Disconnect any active webhook...'
+HTTParty.get("https://api.telegram.org/bot#{token}/setWebhook")
+
 Telegram::Bot::Client.run(token) do |bot|
   bot.listen do |message|
     case message.text
